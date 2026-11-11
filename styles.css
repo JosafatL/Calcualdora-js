@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;600&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --fondo: #16181d;        /* mesa: gris carbón oscuro */
+    --cuerpo: #1f3a8a;       /* carcasa: azul cobalto */
+    --cuerpo-sombra: #142761;
+    --tecla: #f4f6fa;        /* teclas numéricas */
+    --tecla-sombra: #b9c1d1;
+    --tecla-texto: #1b2340;
+    --mostaza: #f2b705;      /* operadores e igual */
+    --mostaza-sombra: #b0850a;
+    --coral: #ef5b4c;        /* AC */
+    --coral-sombra: #a8372b;
+    --lcd: #b7c4a3;          /* pantalla LCD */
+    --lcd-texto: #24301c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', system-ui, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: var(--fondo);
+}
+
+.calculadora {
+    width: min(360px, 100%);
+    padding: 24px 20px 26px;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 112px;
+    grid-auto-rows: 64px;
+    background: var(--cuerpo);
+    border-radius: 28px;
+    box-shadow:
+        0 10px 0 var(--cuerpo-sombra),
+        0 24px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* El protagonista: la pantalla LCD */
+.pantalla {
+    grid-column: span 4;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--lcd-texto);
+    background: var(--lcd);
+    border: 6px solid var(--cuerpo-sombra);
+    border-radius: 12px;
+    box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.btn {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--tecla-texto);
+    background: var(--tecla);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 5px 0 var(--tecla-sombra);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+    user-select: none;
+}
+
+.btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--tecla-sombra);
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--mostaza);
+    outline-offset: 3px;
+}
+
+/* Operadores ( / * - + ) por posición, sin tocar el HTML */
+.calculadora .btn:nth-child(4),
+.calculadora .btn:nth-child(8),
+.calculadora .btn:nth-child(12),
+.calculadora .btn:nth-child(16) {
+    font-size: 1.7rem;
+    background: var(--mostaza);
+    box-shadow: 0 5px 0 var(--mostaza-sombra);
+}
+
+.calculadora .btn:nth-child(4):active,
+.calculadora .btn:nth-child(8):active,
+.calculadora .btn:nth-child(12):active,
+.calculadora .btn:nth-child(16):active {
+    box-shadow: 0 1px 0 var(--mostaza-sombra);
+}
+
+#ac {
+    grid-column: span 2;
+    color: #fff;
+    font-weight: 600;
+    background: var(--coral);
+    box-shadow: 0 5px 0 var(--coral-sombra);
+}
+
+#ac:active {
+    box-shadow: 0 1px 0 var(--coral-sombra);
+}
+
+#borrar {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--cuerpo-sombra);
+    box-shadow: 0 5px 0 #0b1740;
+}
+
+#borrar:active {
+    box-shadow: 0 1px 0 #0b1740;
+}
+
+#igual {
+    grid-column: span 2;
+    font-size: 2rem;
+    font-weight: 600;
+    background: var(--mostaza);
+    box-shadow: 0 5px 0 var(--mostaza-sombra);
+}
+
+#igual:active {
+    box-shadow: 0 1px 0 var(--mostaza-sombra);
+}
+
+@media (max-width: 400px) {
+    .calculadora {
+        padding: 18px 14px 20px;
+        gap: 10px;
+        grid-template-rows: 96px;
+        grid-auto-rows: 58px;
+    }
+
+    .pantalla {
+        font-size: 2.4rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+}
