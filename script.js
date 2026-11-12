@@ -13,6 +13,7 @@ botones.forEach(boton => {
 
         if (boton.id === 'borrar') {
           pantalla.textContent = pantalla.textContent.slice(0, -1);
+          pantalla.textContent = pantalla.textContent || '0';
           return;
         }
 
